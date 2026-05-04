@@ -13,7 +13,7 @@ import java.util.List;
 public class Food {
 
     @Id
-    private int idFood;
+    private int id;
 
     @Column(nullable = false)
     private String name;

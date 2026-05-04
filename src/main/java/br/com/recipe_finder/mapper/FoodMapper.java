@@ -1,7 +1,9 @@
 package br.com.recipe_finder.mapper;
 
 import br.com.recipe_finder.DTO.request.food.FoodDescriptionRequest;
+import br.com.recipe_finder.DTO.response.food.FoodIdNameResponse;
 import br.com.recipe_finder.DTO.response.food.FoodSearchResponse;
+import br.com.recipe_finder.entity.Food;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
@@ -55,6 +57,20 @@ public interface FoodMapper {
             @Mapping(target = "measure19", source = "strMeasure19"),
             @Mapping(target = "measure20", source = "strMeasure20"),
     })
-    public FoodSearchResponse toDTO(FoodDescriptionRequest request);
+    FoodSearchResponse toDTO(FoodDescriptionRequest request);
 
+
+    @Mappings({
+            @Mapping(target = "id", source = "idMeal"),
+            @Mapping(target = "name", source = "meal")
+    })
+    Food toEntity(FoodSearchResponse foodSearchResponse);
+
+
+    @Mapping(target = "id",source = "idMeal")
+    FoodIdNameResponse theSearchResponseToIdNameResponse(FoodSearchResponse foodSearchResponse);
+
+
+    @Mapping(target = "meal", source = "name")
+    FoodIdNameResponse theEntitytoIdNameRespoonse(Food food);
 }

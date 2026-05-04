@@ -6,16 +6,18 @@ import lombok.Setter;
 
 import java.util.List;
 
-@Table
 @Entity
 @Getter
 @Setter
+@Table
 public class Role {
 
     @Id
-    private int idRole;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private Roles role;
 
     @ManyToMany(mappedBy = "roles")

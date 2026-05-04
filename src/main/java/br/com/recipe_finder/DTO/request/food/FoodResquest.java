@@ -10,6 +10,6 @@ import java.util.List;
 @Setter
 public class FoodResquest {
 
-    private List<FoodDescriptionRequest> meals = new ArrayList<>();
+    private List<FoodDescriptionRequest> meals;
 
 }
