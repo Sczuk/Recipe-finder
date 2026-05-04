@@ -3,6 +3,7 @@ package br.com.recipe_finder.controller;
 import br.com.recipe_finder.DTO.response.drink.DrinkResponse;
 import br.com.recipe_finder.DTO.response.food.FoodResponse;
 import br.com.recipe_finder.service.externalApi.theCocktailDb.SearchDrink;
+import br.com.recipe_finder.service.externalApi.theCocktailDb.SearchDrinkById;
 import br.com.recipe_finder.service.externalApi.theMealDb.SearchFood;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@RequestMapping("/externalApi")
+@RequestMapping("/api/externalApi")
 public class ExternalApiController {
 
     @Autowired
