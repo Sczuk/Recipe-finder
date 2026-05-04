@@ -2,6 +2,8 @@ package br.com.recipe_finder.mapper;
 
 import br.com.recipe_finder.DTO.request.drink.DrinkDescriptionRequest;
 import br.com.recipe_finder.DTO.response.drink.DrinkDescriptionResponse;
+import br.com.recipe_finder.DTO.response.drink.DrinkFavoritesResponse;
+import br.com.recipe_finder.entity.Drink;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
@@ -45,6 +47,7 @@ public interface DrinkMapper {
             @Mapping(target = "measure14", source = "strMeasure14"),
             @Mapping(target = "measure15", source = "strMeasure15")
     })
-    public DrinkDescriptionResponse toDTO(DrinkDescriptionRequest request);
+    DrinkDescriptionResponse toDTO(DrinkDescriptionRequest request);
+
 
 }
