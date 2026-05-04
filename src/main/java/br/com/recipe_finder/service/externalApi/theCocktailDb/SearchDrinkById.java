@@ -1,10 +1,13 @@
 package br.com.recipe_finder.service.externalApi.theCocktailDb;
 
-import br.com.recipe_finder.DTO.request.drink.DrinkRequest;
 import br.com.recipe_finder.DTO.request.drink.DrinkDescriptionRequest;
-import br.com.recipe_finder.DTO.response.drink.DrinkResponse;
+import br.com.recipe_finder.DTO.request.drink.DrinkRequest;
 import br.com.recipe_finder.DTO.response.drink.DrinkDescriptionResponse;
+import br.com.recipe_finder.DTO.response.drink.DrinkFavoritesResponse;
+import br.com.recipe_finder.DTO.response.drink.DrinkIdNameResponse;
+import br.com.recipe_finder.DTO.response.drink.DrinkResponse;
 import br.com.recipe_finder.exception.DrinkNotFoundException;
+import br.com.recipe_finder.mapper.DrinkIdNameMapper;
 import br.com.recipe_finder.mapper.DrinkMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,25 +17,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class SearchDrink {
+public class SearchDrinkById {
 
     @Autowired
-    private DrinkMapper mapper;
+    private DrinkIdNameMapper mapper;
 
-    public DrinkResponse execute(String drink){
+    public DrinkFavoritesResponse execute(int idDrink){
         RestTemplate rt = new RestTemplate();
-        List<DrinkDescriptionResponse> listDrinks = new ArrayList<>();
-        String url = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s="+drink;
+        List<DrinkIdNameResponse> listDrinks = new ArrayList<>();
+        String url = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i="+idDrink;
         DrinkRequest request = rt.getForObject(url,DrinkRequest.class);
         if(request.getDrinks() == null){
-            throw new DrinkNotFoundException("Drink not found");
+            throw new DrinkNotFoundException("id drink not found");
         }
         for(DrinkDescriptionRequest searchRequest : request.getDrinks()){
-            DrinkDescriptionResponse searchResponse = mapper.toDTO(searchRequest);
+            DrinkIdNameResponse searchResponse = mapper.toDTO(searchRequest);
             listDrinks.add(searchResponse);
         }
 
-        return new DrinkResponse(listDrinks);
+        return new DrinkFavoritesResponse(listDrinks);
     }
 
 }
